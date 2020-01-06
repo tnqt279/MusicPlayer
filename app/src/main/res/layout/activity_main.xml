@@ -12,17 +12,15 @@
         layout="@layout/tool_bar">
 
     </include>
+
     <ListView
         android:id="@+id/listView"
+        style="@style/Widget.AppCompat.ListView.Menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/Tool_bar"
-        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
-        android:background="@color/colorPrimaryDark"
-        >
+        android:background="@color/colorLight"
+        android:outlineAmbientShadowColor="@color/colorPrimaryDark">
+
     </ListView>
-
-
-
-
 </RelativeLayout>
