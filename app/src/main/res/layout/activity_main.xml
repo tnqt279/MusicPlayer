@@ -21,8 +21,4 @@
         android:background="@color/colorPrimaryDark"
         >
     </ListView>
-
-
-
-
 </RelativeLayout>
