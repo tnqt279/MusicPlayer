@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".MusicScreen"
+    >
+
+    <ImageView
+        android:id="@+id/PlayButton"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/progressBar"
+        android:adjustViewBounds="true"
+        android:onClick="OnPlayButtonClick"
+        android:scaleType="fitStart"
+        android:src="@drawable/pause"
+        />
+
+    <ImageView
+
+        android:id="@+id/PreviousButton"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/progressBar"
+        android:src="@drawable/previous"
+        android:onClick="OnPreviousButtonClick"
+        />
+
+    <ImageView
+
+        android:id="@+id/NextButton"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="255dp"
+        android:layout_marginLeft="255dp"
+        android:layout_marginTop="30dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/progressBar"
+        android:src="@drawable/next"
+        android:onClick="OnNextButtonClick"
+        />
+
+    <ImageView
+        android:id="@+id/ShuffleButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/progressBar"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/shuffle"
+        android:onClick="OnShuffleButtonClick"
+        />
+    <ImageView
+        android:id="@+id/RepeatButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/progressBar"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="340dp"
+        android:layout_marginStart="340dp"
+        android:src="@drawable/repeat"
+        android:onClick="OnRepeatButtonClick"
+        />
+
+    <ImageView
+        android:id="@+id/SongImage"
+        android:layout_width="324dp"
+        android:layout_height="284dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true"
+        android:background="@color/colorPrimaryDark"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logov6" />
+
+    <TextView
+        android:id="@+id/SongName"
+        android:layout_width="349dp"
+        android:layout_height="47dp"
+        android:layout_below="@id/SongImage"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Name"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="400dp"
+        android:layout_height="17dp"
+        android:layout_below="@id/songAlbum"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:progressBackgroundTint="@color/colorAccent"
+        android:progressTint="@color/colorAccent"
+
+        />
+
+    <TextView
+        android:id="@+id/SongArtist"
+        android:layout_width="349dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/SongName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Artist"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/songAlbum"
+        android:layout_width="349dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/SongArtist"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Album"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+</RelativeLayout>
