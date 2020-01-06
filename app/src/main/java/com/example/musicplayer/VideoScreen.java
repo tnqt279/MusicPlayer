@@ -19,6 +19,7 @@ public class VideoScreen extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layoutvid);
+
         //String path = "android.resource://"+getPackageName()+"/"+com.example.musicplayer.R.raw.video;
         //videoView.setVideoPath(path);
 
