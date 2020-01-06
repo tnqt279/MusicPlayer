@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/Tool_bar"
-        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+        android:outlineAmbientShadowColor="@color/colorLight"
         android:background="@color/colorFade"
         >
     </ListView>
