@@ -14,6 +14,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -26,7 +27,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public class Jukebox {
+public class Jukebox implements Serializable {
     private ArrayList<JukeboxTrack> playlist;
     private int index = 0;
     private String MessageError;
@@ -65,6 +66,10 @@ public class Jukebox {
 
         return playlist;
     }
+    public void SetPlaylist(ArrayList<JukeboxTrack> arr) {
+        playlist = arr;
+    }
+
 
     //save and load database
     public void Load(InputStream inputStream) {

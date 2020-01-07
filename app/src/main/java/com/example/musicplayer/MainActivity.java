@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
 
     ArrayList<String> arrayList;
-
+    Jukebox jukebox;
     ListView listview;
     //hello
     ArrayAdapter<String> arrayAdapter;
@@ -78,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Cursor cursor = listview.getItemAtPosition(position);
+                int i = getActualPosition(position, listview);
+
+                OpenMusic(i);
 
             }
         });
@@ -87,10 +92,14 @@ public class MainActivity extends AppCompatActivity {
         Uri songUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor songCursor = contentResolver.query(songUri, null, null, null, null);
         if(songCursor != null && songCursor.moveToFirst()){
-            int songName = songCursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME);
+            int songName = songCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int songArtist = songCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
-            int Duration = songCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
             int songAlbum = songCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);
+            int songDuration = songCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
+            int songPath = songCursor.getColumnIndex(MediaStore.Audio.Media.RELATIVE_PATH);
+            int songPath2 = songCursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME);
+            int songPath3 = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
+
             do{
                 String currentTitle = songCursor.getString(songName);
                 String currentArtist = songCursor.getString(songArtist);
@@ -98,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
                 String currentDuration = ConvertDurationMusic(temp);
                 String currentAlbum = songCursor.getString(songAlbum);
                 arrayList.add(currentTitle + "\nArtist: " + currentArtist + "\nDuration: " + currentDuration + "\nAlbum: "+ currentAlbum);
+                String currentPath = songCursor.getString(songPath);
+                String currentPath2 = songCursor.getString(songPath2);
+                String currentPath3 = songCursor.getString(songPath3);
+                //arrayList.add(currentTitle + "\n" + currentArtist);
+                JukeboxTrack jbt = new JukeboxTrack(currentTitle, currentArtist, currentAlbum,   currentPath2, currentDuration);
+                jukebox.AddTrack(jbt);
+                arrayList.add(jbt.GetName() + "\n" + jbt.GetFilepath());
             }while(songCursor.moveToNext());
         }
     }
@@ -162,6 +178,30 @@ public class MainActivity extends AppCompatActivity {
         });
         return super.onCreateOptionsMenu(menu);
     }
+
+    public int getActualPosition(int position, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+        if (position < firstListItemPosition || position > lastListItemPosition ) {
+            return position;
+        } else {
+            final int childIndex = position - firstListItemPosition;
+            return childIndex;
+
+        }
+    }
+
+    public void OpenMusic(int index) {
+        Intent intent = new Intent(this, MusicScreen.class);
+        Bundle JukeboxBundle = new Bundle();
+        JukeboxBundle.putSerializable("JUKEBOX_BUNDLE", jukebox);
+        intent.putExtra("SONG_INDEX", index);
+        intent.putExtra("JUKEBOX", JukeboxBundle);
+
+        startActivity(intent);
+    }
+
 
     public String ConvertDurationMusic(int duration)
     {

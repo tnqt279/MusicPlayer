@@ -1,20 +1,24 @@
 package com.example.musicplayer;
 
-public class JukeboxTrack {
+import java.io.Serializable;
+
+public class JukeboxTrack implements Serializable {
     private String name;
     private String artist;
     private String filetype;
     private String duration;
     private String album;
     private String filepath;
+    private int number;
 
-    public  JukeboxTrack (String Name, String Artist, String Album, String Filetype,String Filepath, String Duration) {
+    public  JukeboxTrack (String Name, String Artist, String Album,String Filepath, String Duration) {
         name = Name;
         artist = Artist;
         album = Album;
-        filetype = Filetype;
+        //filetype = Filetype;
         filepath = Filepath;
         duration = Duration;
+        //number = Number;
 
     }
 
@@ -25,6 +29,7 @@ public class JukeboxTrack {
         filetype = "";
         filepath = "";
         duration = "";
+        number = 0;
     }
 
     //Name
@@ -75,6 +80,8 @@ public class JukeboxTrack {
         duration = d;
     }
 
-
+    //Track number
+    public int GetNumber() {return number;}
+    public void SetNumber(int n) {number = n;}
 
 }

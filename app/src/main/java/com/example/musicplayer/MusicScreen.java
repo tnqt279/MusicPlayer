@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,6 +50,16 @@ public class MusicScreen extends AppCompatActivity {
         //String prevActivity = caller.getExtras().getString("callingActivity");
 
         AskPermission();
+        mediaPlayer = new MediaPlayer();
+        Bundle JukeboxBundle = getIntent().getBundleExtra("JUKEBOX");
+        if (JukeboxBundle != null) {
+            jukebox =(Jukebox)JukeboxBundle.getSerializable("JUKEBOX_BUNDLE");
+        }
+        index = getIntent().getIntExtra("SONG_INDEX", 0);
+        TextView temp2 = findViewById(R.id.SongArtist);
+        temp2.setText(Integer.toString(index));
+        TextView temp = findViewById(R.id.SongName);
+        temp.setText(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC) + "/" + jukebox.getTrack(index).GetFilepath());
         Load();
         Play();
 
@@ -57,11 +70,11 @@ public class MusicScreen extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        mediaPlayer.stop();
-        mediaPlayer.release();
+        //mediaPlayer.stop();
+        //mediaPlayer.release();
     }
 
-    MediaPlayer mediaPlayer = new MediaPlayer();
+    MediaPlayer mediaPlayer;
     int Songs[] = new int[5];
     Jukebox jukebox = new Jukebox();
     int index = 0;
@@ -134,17 +147,13 @@ public class MusicScreen extends AppCompatActivity {
 
     public void Load() {
         //int Songs[] = new int[2];
-        Songs[0] = R.raw.uprising;
-        Songs[1] = R.raw.wonderful_tonight;
-        Songs[2] = R.raw.dont_speak;
-        Songs[3] = R.raw.thriller;
-        Songs[4] = R.raw.yeah_yeah;
         //RecordTrackInfo();
 
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         //mediaPlayer = MediaPlayer.create(this, Songs[0]);
-        index = 0;
-        mediaPlayer = MediaPlayer.create(this, Uri.parse("android.resource://"+getPackageName()+"/raw/uprising.mp3"));
+        //Uri sUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        //sUri.toString();
+        mediaPlayer = MediaPlayer.create(this, Uri.parse(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)+ "/" + jukebox.getTrack(index).GetFilepath()));
 
 
     }
@@ -152,10 +161,10 @@ public class MusicScreen extends AppCompatActivity {
         //String SongUri[] = new String[2];
         //SongUri[0] = "android.resource://"+getPackageName()+"/"+R.raw.uprising;
         //SongUri[1] = "android.resource://"+getPackageName()+"/"+R.raw.wonderful_tonight;
-        if (RepeatFlag)
-            mediaPlayer.setLooping(true);
-        else
-            mediaPlayer.setLooping(false);
+        //if (RepeatFlag)
+        //   mediaPlayer.setLooping(true);
+        //else
+        //    mediaPlayer.setLooping(false);
         mediaPlayer.start();
         TrackInfoUpdate();
     }
@@ -243,11 +252,7 @@ public class MusicScreen extends AppCompatActivity {
     }
 
     public void TrackInfoUpdate() {
-        TextView TrackName = findViewById(R.id.SongName);
-        if (jukebox.getTrack(0).GetName() == null)
-            TrackName.setText("NULL");
-        else
-            TrackName.setText(jukebox.getTrack(0).GetName());
+
     }
 
     /*@Override
