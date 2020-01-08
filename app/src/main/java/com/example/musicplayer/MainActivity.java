@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.Tool_bar);
         setSupportActionBar(toolbar);
+        jukebox = new Jukebox();
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE))
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE);
@@ -106,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
                 int temp = songCursor.getInt(Duration);
                 String currentDuration = ConvertDurationMusic(temp);
                 String currentAlbum = songCursor.getString(songAlbum);
-                arrayList.add(currentTitle + "\nArtist: " + currentArtist + "\nDuration: " + currentDuration + "\nAlbum: "+ currentAlbum);
+                //arrayList.add(currentTitle + "\nArtist: " + currentArtist + "\nDuration: " + currentDuration + "\nAlbum: "+ currentAlbum);
+                //String currentAlbum = songCursor.getString(songAlbum);
+                //String currentDuration = songCursor.getString(songDuration);
                 String currentPath = songCursor.getString(songPath);
                 String currentPath2 = songCursor.getString(songPath2);
                 String currentPath3 = songCursor.getString(songPath3);
@@ -203,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     public String ConvertDurationMusic(int duration)
     {
         String result = "";
@@ -234,5 +238,6 @@ public class MainActivity extends AppCompatActivity {
             result = "00:" + mns + ":" + scs;
         return result;
     }
+
 }
 
