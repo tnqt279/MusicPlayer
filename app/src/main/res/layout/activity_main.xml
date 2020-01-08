@@ -17,11 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/Tool_bar"
-        android:background="@color/colorLight"
-        >
+        android:background="@color/colorLight">
     </ListView>
-
-
 
 
 </RelativeLayout>
